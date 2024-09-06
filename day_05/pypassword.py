@@ -26,4 +26,4 @@ for characters in password:
     password_as_string += characters
 
 print(password)
-print('Your password is : ' + password_as_string)
+print('Your password is : ' + vmxfsfxxcxcxpassword_as_string)
