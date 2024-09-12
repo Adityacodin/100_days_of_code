@@ -4,7 +4,7 @@ from art import logo
 def get_int(message):
     while True:
         try:
-            value = int(input(message))
+            value = int(input(message).strip())
             return value
         except ValueError:
             pass
