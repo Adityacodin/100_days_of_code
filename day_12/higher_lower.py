@@ -1,6 +1,9 @@
 import random
 from art import logo
 
+EASY_LEVEL_TURNS = 10
+HARD_LEVEL_TURNS = 5
+
 def get_int(message):
     while True:
         try:
@@ -18,6 +21,13 @@ def get_difficulty(message):
             return diff
         except ValueError as e:
             print(e)
+
+def set_difficulty():
+    diff = get_difficulty("Choose a difficulty, 'easy' or 'hard': ")
+    if diff == 'easy':
+        return EASY_LEVEL_TURNS
+    else:
+        return HARD_LEVEL_TURNS
 
 
 def play_game(num,atmpts):
@@ -37,14 +47,12 @@ def play_game(num,atmpts):
         print("You Lose. You ran out of attempts...")
     print(f"The number was {num}")
 
+def game():
+    print(logo)
+    print("Welcome to the Number Guessing Game")
+    number = random.randint(1,100)
+    print("I am thinking of a number between 1 and 100.")
+    attempts = set_difficulty()
+    play_game(number,attempts)
 
-print(logo)
-print("Welcome to the Number Guessing Game")
-number = random.randint(1,100)
-print("I am thinking of a number between 1 and 100.")
-difficulty = get_difficulty("Choose a difficulty. type 'easy' or 'hard': ")
-if difficulty == 'easy':
-    attempts = 10
-elif difficulty == 'hard':
-    attempts = 5
-play_game(number,attempts)
+game()
