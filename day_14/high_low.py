@@ -9,6 +9,9 @@ def get_article(word):
     else:
         return 'a'
 
+def format_data(acc_data):
+    return f"{acc_data['name']}, {get_article(acc_data['description'])} {acc_data['description']} from {acc_data['country']}"
+
 def get_a_or_b(message):
     while True:
         try:
@@ -19,6 +22,12 @@ def get_a_or_b(message):
         except ValueError as e:
             print(e)
 
+def validate(a,b,user_option):
+    if user_option == 'a' and a['follower_count']>b['follower_count']:
+        return True
+    elif user_option == 'b' and a['follower_count']<b['follower_count']:
+        return True
+    return False
 
 def game():
     game_score = 0
@@ -27,28 +36,27 @@ def game():
     while a == b:
         b = random.choice(data)
     while True:    
-        print(f"\nCompare A - {a['name']}, {get_article(a['description'])} {a['description']} from {a['country']}")
+        print(f"\nCompare A - {format_data(a)}")
         print(vs)
-        print(f"Against B - {b['name']}, {get_article(b['description'])} {b['description']} from {b['country']}")
+        print(f"Against B - {format_data(b)}")
         user_selection = get_a_or_b("\nWho has more followers. A or B : ")
         print("\n"*30)
-        if user_selection == 'a' and a['follower_count']>b['follower_count']:
+        if validate(a,b,user_selection):
             game_score += 1
-            print(f"You are correct. Current score : {game_score}")
-            a = b
-            b = random.choice(data)
-            while a == b:
-                b = random.choice(data)
-        elif user_selection == 'b' and a['follower_count']<b['follower_count']:
-            game_score += 1
-            print(f"You are correct. Current score : {game_score}")
-            b = a
-            a = random.choice(data)
-            while a == b:
+            print(f"You are correct, Current score : {game_score}")
+            if user_selection == 'a':
+                a = b
+                b =  random.choice(data)
+                while a == b:
+                    b = random.choice(data)
+            elif user_selection == 'b':
+                b = a
                 a = random.choice(data)
+                while a == b:
+                    a = random.choice(data)
         else:
             print(f"You are wrong. Final score : {game_score} ")
             break
-
+        
 print(logo)
 game()
