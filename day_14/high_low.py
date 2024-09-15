@@ -1,6 +1,7 @@
 import random
 from game_data import data
 from art import logo,vs
+import os
 
 def get_article(word):
     vowel = 'aeiou'
@@ -40,7 +41,7 @@ def game():
         print(vs)
         print(f"Against B - {format_data(b)}")
         user_selection = get_a_or_b("\nWho has more followers. A or B : ")
-        print("\n"*30)
+        os.system('cls')
         if validate(a,b,user_selection):
             game_score += 1
             print(f"You are correct, Current score : {game_score}")
