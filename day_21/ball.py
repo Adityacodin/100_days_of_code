@@ -15,8 +15,23 @@ class Ball(Turtle):
     def tilt(self,t):
         self.setheading(self.heading()+t)
 
+    def move(self):
+        self.forward(20)    
+
     def bounce(self):
-        if self.ycor() >= TOP:
-            self.tilt(-45)
-        self.forward(10)        
-        
+        if self.heading() <= 45 :
+            self.tilt(90)
+        elif self.heading() > 45 :
+            self.tilt(-90)
+        elif self.heading() <= 135 :
+            self.tilt(90)
+        elif self.heading() > 135 :
+            self.tilt(-90)
+        elif self.heading() <= 225 :
+            self.tilt(90)
+        elif self.heading() > 225 :
+            self.tilt(-90)
+        elif self.heading() <= 315 :
+            self.tilt(90)
+        elif self.heading() > 315 :
+            self.tilt(-90)        

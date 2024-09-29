@@ -2,6 +2,10 @@ from turtle import Screen
 from paddle import Paddle
 from ball import Ball
 from time import sleep
+from random import randint
+
+TOP = 290
+BTM  = -290
 
 # create screen
 scr = Screen()
@@ -14,8 +18,7 @@ scr.tracer(0)
 l_padl = Paddle(initial_pos = (350,0))
 r_padl = Paddle(initial_pos = (-350,0))
 ball = Ball()
-ball.tilt(45)
-
+ball.tilt(randint(0,90))
 # moving the paddles
 scr.listen()
 scr.onkey(fun = r_padl.move_up,key = 'w')
@@ -25,13 +28,11 @@ scr.onkey(fun = l_padl.move_down,key = 'Down')
 while game_is_on:
     sleep(0.1)
     scr.update()
-    ball.bounce()
+    ball.move()
 
-    if ball.ycor()>300 or ball.ycor()<300:
-        
-
-
-
-
-
+    if ball.ycor() >= TOP or ball.ycor()<= BTM:
+        ball.bounce()
+    if ball.distance(l_padl) <50 and ball.xcor()>340:
+        ball.bounce()
+    
 scr.exitonclick()
