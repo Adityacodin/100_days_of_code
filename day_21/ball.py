@@ -6,32 +6,25 @@ BOTTOM = -280
 class Ball(Turtle):
     def __init__(self):
         super().__init__()
-        self.shape('turtle')
+        self.shape('circle')
+        self.penup()
         self.shapesize(stretch_len=1,stretch_wid=1)
         self.color('white')
+        self.move_speed = 0.1
         self.x = 10
         self.y = 10
 
-    def tilt(self,t):
-        self.setheading(self.heading()+t)
-
     def move(self):
-        self.forward(20)    
+        self.goto(self.xcor()+self.x,self.ycor()+self.y)
 
-    def bounce(self):
-        if self.heading() <= 45 :
-            self.tilt(90)
-        elif self.heading() > 45 :
-            self.tilt(-90)
-        elif self.heading() <= 135 :
-            self.tilt(90)
-        elif self.heading() > 135 :
-            self.tilt(-90)
-        elif self.heading() <= 225 :
-            self.tilt(90)
-        elif self.heading() > 225 :
-            self.tilt(-90)
-        elif self.heading() <= 315 :
-            self.tilt(90)
-        elif self.heading() > 315 :
-            self.tilt(-90)        
+    def bounce_y(self):
+        self.y *= -1
+    
+    def bounce_x(self):
+        self.x *= -1
+        self.move_speed *= 0.9
+    
+    def reset_pos(self):
+        self.goto(0,0)
+        self.bounce_x()
+        self.move_speed = 0.1
