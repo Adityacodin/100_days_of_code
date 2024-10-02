@@ -20,6 +20,14 @@ class Snake():
         new_seg.penup()
         new_seg.goto(pos)
         self.snk.append(new_seg)
+    
+    def reset(self):
+        for seg in self.snk:
+            seg.goto(1000,1000)
+        self.snk.clear()
+        self.create_snake()
+        self.head = self.snk[0]
+
 
     def move(self):
         for s_num in range(len(self.snk)-1,0,-1):
